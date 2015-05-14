@@ -20,6 +20,7 @@
 \usepackage{times}
 \usepackage{url}
 \usepackage{latexsym}
+\usepackage{caption}
 %
 \usepackage{lipsum}                    
 \usepackage{xargs}                     
@@ -30,6 +31,8 @@
 \newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+
+\newcommand{\tabref}[1]{\textit{Table \ref{#1}}}
 %
 %\setlength\titlebox{5cm}
 
@@ -63,47 +66,101 @@
 \section{Introduction}
 \todo{Write introduction
 
+* Lot of work in summarization, twitter is a way of spreading data. 
+
 * about twitter
 
-* tweets link to articles, classify as extractive summarization problem
+* tweets link to articles, classify as extractive summarization problem -> does it make sense? cite paper
+
+* No, it doesn't. 
 }
+
+Twitter is a public message broadcasting service with the constraint on the message being under 140 charachters. Since all posts on the website are public and a limited length, we can say that it qualifies as an altogether different genre of text - one that conveys precise message of a given topic in a limited number of charaters. This message can be an opinion about some happening or the news of it, and so on. The nature of this website has made it popular for global discussions on current goings-on in the world, with a large number of people constantly tweeting about all various topics.
+
+
+
 
 \section{Background and Related Work}
 \change{Reduce this and add new papers
 
-* combine tweet generation papers
-
 * summarization evaluation papers
 
-* papers on classifying tweets based on intent?}
+* papers on classifying tweets based on intent?
 
-There has been work on using user ratings prediction for stylistic surface realisation \cite{dethlefs2014cluster}. The study used ratings by users for generated texts along three axes of style, colloquialism, naturalness and politeness. The study then clustered users according to their ratings, and used stylistic predictions from this cluster towards the surface realization of new text. The three axes chosen were fairly arbitrarily, and may not have been completely independent. However, the concept of rating documents according to the stylistic characteristics of the text and using this stylistic information to rate the newly generated text is something that can be explored further. 
+* Add some glue at beginning of section}
 
-Brooke et al., 2012 \cite{brooke2012building} describe the process of building a formality lexicon by analyzing the stylistics of text. They calculate formality scores for words and sentences by training a model on a large corpus based on the appearance of words in specific documents. Their model represents words as vectors and the formal and informal seeds appear in opposite halves of the graphs, suggesting that we can use these seeds to determine if an article is formal or informal. \cite{brooke2013multi} used an LDA based model using a similar idea of seed words for getting stylistic rankings for documents. The documents were ranked for styles such as literary, colloquial, subjective, concrete, and so on. 
+There has been work on using user ratings prediction for stylistic surface realisation \newcite{dethlefs2014cluster}. The study used ratings by users for generated texts along three axes of style, colloquialism, naturalness and politeness. The study then clustered users according to their ratings, and used stylistic predictions from this cluster towards the surface realization of new text. The three axes chosen were fairly arbitrarily, and may not have been completely independent. However, the concept of rating documents according to the stylistic characteristics of the text and using this stylistic information to rate the newly generated text is something that can be explored further. 
 
-There have also been studies specific to Twitter data, for classifying and summarizing text, intents, etc. \cite{ghosh2011entropy}, classified the retweeting activity of users based on entropy. The study considered the occurrence of the same URL in a different tweet as a ‘retweet’, and was able to separate the tweets as automatic or robotic retweeting, campaigns, news, blogs and so on. The study shows some interesting trends of retweeting activity for each of these cases. In another study,\cite{chen2012extracting}, were able to extract sentiment expressions based on their corpus of tweets, that resulted in extraction of both formal and slang sentiment bearing words.
+\newcite{brooke2012building} describe the process of building a formality lexicon by analyzing the stylistics of text. They calculate formality scores for words and sentences by training a model on a large corpus based on the appearance of words in specific documents. Their model represents words as vectors and the formal and informal seeds appear in opposite halves of the graphs, suggesting that we can use these seeds to determine if an article is formal or informal. \newcite{brooke2013multi} used an LDA based model using a similar idea of seed words for getting stylistic rankings for documents. The documents were ranked for styles such as literary, colloquial, subjective, concrete, and so on. 
 
-There has also been an attempt at generating tweets, texts of 140 characters using different text summarization techniques \cite{lloret2013towards}). Summarization systems were used to summarize texts to sentences and then were compared against each other, evaluated using the ROUGE metric for evaluation. The ROUGE-1, ROUGE-2 and ROUGE-L metrics were used and the tweets were compared against an ideal summary. ROUGE is better when used with multiple reference texts and is not meant to be used at the sentence level. Thus the evaluation is done using the unigram, bigram and longest common subsequence matching techniques used in ROUGE-1, 2 and L. None of these techniques evaluate the fluency of the text, which is generally not expected from extractive summarization. 
+There have also been studies specific to Twitter data, for classifying and summarizing text, intents, etc. \newcite{ghosh2011entropy} classified the retweeting activity of users based on entropy. The study considered the occurrence of the same URL in a different tweet as a ‘retweet’, and was able to separate the tweets as automatic or robotic retweeting, campaigns, news, blogs and so on. The study shows some interesting trends of retweeting activity for each of these cases. In another study,\newcite{chen2012extracting}, were able to extract sentiment expressions based on their corpus of tweets, that resulted in extraction of both formal and slang sentiment bearing words.
+
+\improvement{More details on each paper?}
+Mirco-blogging sites, easy access to Internet and the popularity of social media offers an opportunity to analyze data that comprises of statements from a huge number of users. Twitter is such a platform and has gained millions of users by now, and is hugely popular platform now for announcements, voicing opinions, promotions and so on. This data has been used for event summarization studies. \newcite{o2010tweetmotif} uses topic summarizations for a given search for better browsing. \newcite{chakrabarti2011event} generate an event summary by learning the event using a Hidden Markov Model over the tweets describing it. \newcite{wang2014socially} generate a coherent event summary by treating summarization as an optimization problem for topic cohesion. \newcite{inouye2011comparing} compare multiple summarization techniques to generate a summary of multi-post blogs on Twitter.
+
+There has also been an attempt at generating tweets, texts of 140 characters using different text summarization techniques by  \newcite{lloret2013towards}. Summarization systems were used to summarize texts to sentences and then were compared against each other, evaluated using the ROUGE metric for evaluation. The ROUGE-1, ROUGE-2 and ROUGE-L metrics were used and the tweets were compared against an ideal summary. ROUGE is better when used with multiple reference texts and is not meant to be used at the sentence level. Thus the evaluation is done using the unigram, bigram and longest common subsequence matching techniques used in ROUGE-1, 2 and L. None of these techniques evaluate the fluency of the text, which is generally not expected from extractive summarization. 
+
+To the best of our knowledge, only \newcite{lofi2012iparticipate} aim at generating tweets based on data from documents related to the topic. The system proposed uses keyword extraction techniques to generate tweets containing links to the article, hashtags based on the topic from documents and summarized content of the document. The study does not give details of implementation or evaluation of the system. Moreover, after the hashtags and the url, the Twitter constraint of 140 characters leaves room for few words in the generated tweet.
+
 
 \section{Data Extraction and Preprocessing}
 \improvement{Reduce preprocessing part, add graphs}
 
 \subsection{Using Twitter for Data Extraction}
 
-Twitter is a public message broadcasting service with the constraint on the message being under 140 charachters. Since all posts on the website are public and a limited length, we can say that it qualifies as an altogether different genre of text - one that conveys precise message of a given topic in a limited number of charaters. This message can be an opinion about some happening or the news of it, and so on. The nature of this website has made it popular for global discussions on current goings-on in the world, with a large number of people constantly tweeting about all various topics.
-
-There have been numerous studies using data from the public Twitter feeds to classify based on the URLs in the data, notably the study to classify intents of tweets on the site based on the URLs, as well as the study to classify sentiment polarity based on the text of the tweets. However, we found none of these datasets suitable, since they did not contain URLs in the manner ideal to us.
+As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, since none of these datasets contained tweets and related articles promoted by these tweets separated into categories as required for this study, we extracted data directly from the site.
 
 \subsection{Extracting Data}
 
-Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues like the recent outbreak of ebola. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To give the data some variety, the data was extracted over the course of 15 days, which gave us multiple news stories to choose from for the search terms. Only English tweets were extracted since the study is limited to English. In the beginning, about 30,000 tweets were extracted, and more than half of these tweets, around 16,000 contained URLs referencing some news articles, photos on photo sharing sites, and videos. The hashtags were chosen to maximise the number of articles related to the tweets. Hence, a lot of topics that were chosen were being tweeted about by news agencies and other popular news sources.
+Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To give the data some variety, the data was extracted over the course of 15 days in November, which gave us multiple news stories to choose from for the search terms. A few examples of the search terms are shown in \tabref{tab:searchterms} Only English tweets were extracted since the study is limited to English. In the beginning, about 30,000 tweets were extracted, and more than half of these tweets, around 16,000 contained URLs referencing some news articles, photos on photo sharing sites, and videos. The hashtags were chosen to maximise the number of articles related to the tweets. Hence, a lot of topics that were chosen were being tweeted about by news agencies and other popular news sources.
+\improvement{Can be compressed if required}
 
-The articles referenced by the tweets were extracted using the URLs mentioned in the tweets. The ‘newspaper’ package was used to extract article text and the title from the web page.
 
 
-The data from the tweets was cleaned by removing the tweets that were in different languages as well as the ones that were retweeted, which is equivalent of re-publishing the same tweet from a different user. 
+% \begin{table}[h]
+% \begin{tabular}{lll}
+% \hline
+% \#winteriscoming         & \#rosetta              & \#moneyball                          \\ 
+% \#apec2014               & \#oscarpistorius       & \#bahamas               \\
+% \#G20                    & \#johnoliver           & \#philae               \\
+% \#annefrank              & \#putin                & \#lestweforget         \\
+% \#cdnpoli                & \#android              & \#syria                \\
+% \#mangalayan             & \#montythepenguin      & \#beenrapedneverreported             \\
+% \#playingitmyway         & \#MarysvilleShooting   & \#1989                 \\
+% \#GOP                    & \#ottawashootings      & \#canadachinatradedeal \\
+% \#ausvssa                & \#BBCSyriaWars         & \#mentalhealth         \\
+% \#lollipopupdate         & \#berlinwall           & \#memorialday          \\
+% \#nexus6                 & \#RobertONeill         & \#nycmarathon          \\
+% \#ebola                  & \#TaylorSwift          & \#pointergate          \\
+% \#obamacare              & \#apec                 & \#theforceawakens      \\
+% \#1wtc                   & \#netneutrality        & \#erdogan              \\
+% \#snowstorm              & \#instellar            & \#buffaloSnow          \\
+% \#lollipop               & \#cometlanding         & \#KevinVickers         \\
+% \#haiyan                 & \#ferguson             & \#abercrombieandfitch  \\
+% \#harrypotter            & \#betterstarwarstitles & \#ghomeshi             \\ \hline
+% \end{tabular}
+% \end{table}
 
-Unique URLs were first extracted from the 16,000 or so URLs in the data. Next, data from these unique URLs was extracted and then preprocessed. For the articles obtained from URLs, photos and video links for example, from Instagram and Youtube needed to be removed. For this, the data cleaning was achieved by removing articles by limiting word length of the extracted text to about 150 words. This ensured the removal of photos, videos, advertisements, incorrectly extracted articles from the data.  After this preprocessing, the number of useful articles reduced from 6003 to 3066.
+\begin{table}[htbp]
+
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{Politics}                                                       & \multicolumn{1}{c|}{Science \& Technology}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#apec2014\\ \#G20\\ \#oscarpistorius\end{tabular}        & \begin{tabular}[c]{@{}l@{}}\#rosetta\\ \#lollipop\\ \#mangalayan\end{tabular}            \\ \hline
+\multicolumn{1}{|c|}{Events}                                                         & \multicolumn{1}{c|}{Films and Pop culture}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#haiyan\\ \#memorialday\\ \#ottawashootings\end{tabular} & \begin{tabular}[c]{@{}l@{}}\#TaylorSwift\\ \#theforceawakens\\ \#johnoliver\end{tabular} \\ \hline
+\multicolumn{1}{|c|}{International}                                                  & \multicolumn{1}{c|}{Sports}                                                              \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#berlinwall\\ \#ebola\\ \#erdogan\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\#ausvssa\\ \#playingitmyway\\ \#nycmarathon\end{tabular}     \\ \hline
+\end{tabular}
+% \bigskip
+\captionof{table}{Table of Hashtags used for extraction. Table shows some examples of search terms chosen from various different categories.}
+\label{tab:searchterms}
+\end{table}
+
+The data from the tweets was cleaned by removing the tweets that were not in English as well as the ones that were retweeted, which is equivalent to re-publishing the same tweet from a different user. 
+
+Unique URLs were first extracted from the 16,000 or so URLs in the data. Next, data from these unique URLs was extracted and then preprocessed. The ‘newspaper’ package was used to extract article text and the title from the web page. For the articles obtained from URLs, photos and video links for example, from Instagram and Youtube needed to be removed. For this, the data cleaning was achieved by removing articles by limiting word length of the extracted text to about 150 words. This ensured the removal of photos, videos, advertisements, incorrectly extracted articles from the data.  After this preprocessing, the number of useful articles reduced from 6003 to 3066.
 
 \subsection {Tagging articles}
 
