@@ -1,0 +1,58 @@
+\section{Data Extraction and Preprocessing}
+
+\subsection{Using Twitter for Data Extraction}
+
+As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, since none of the datasets used in these studies contained tweets and related articles promoted by these tweets separated into categories as required for this study, we extracted data directly from the site.
+
+\subsection{Extracting Data}
+
+Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To get a broader sample, the data was extracted over the course of 15 days in November, which gave us multiple news stories to choose from for the search terms. A few examples of the search terms are shown in \tabref{tab:searchterms} Only English tweets were extracted since the study is limited to English. In the beginning, about 30,000 tweets were extracted, and more than half of these tweets, around 16,000 contained URLs referencing some news articles, photos on photo sharing sites, and videos. The hashtags were chosen to maximise the number of articles related to the tweets. Hence, a lot of topics that were chosen were being tweeted about by news agencies and other popular news sources. \improvement{Can be compressed if required}
+
+% \begin{table}[h]
+% \begin{tabular}{lll}
+% \hline
+% \#winteriscoming         & \#rosetta              & \#moneyball                          \\ 
+% \#apec2014               & \#oscarpistorius       & \#bahamas               \\
+% \#G20                    & \#johnoliver           & \#philae               \\
+% \#annefrank              & \#putin                & \#lestweforget         \\
+% \#cdnpoli                & \#android              & \#syria                \\
+% \#mangalayan             & \#montythepenguin      & \#beenrapedneverreported             \\
+% \#playingitmyway         & \#MarysvilleShooting   & \#1989                 \\
+% \#GOP                    & \#ottawashootings      & \#canadachinatradedeal \\
+% \#ausvssa                & \#BBCSyriaWars         & \#mentalhealth         \\
+% \#lollipopupdate         & \#berlinwall           & \#memorialday          \\
+% \#nexus6                 & \#RobertONeill         & \#nycmarathon          \\
+% \#ebola                  & \#TaylorSwift          & \#pointergate          \\
+% \#obamacare              & \#apec                 & \#theforceawakens      \\
+% \#1wtc                   & \#netneutrality        & \#erdogan              \\
+% \#snowstorm              & \#instellar            & \#buffaloSnow          \\
+% \#lollipop               & \#cometlanding         & \#KevinVickers         \\
+% \#haiyan                 & \#ferguson             & \#abercrombieandfitch  \\
+% \#harrypotter            & \#betterstarwarstitles & \#ghomeshi             \\ \hline
+% \end{tabular}
+% \end{table}
+
+\begin{table}[htbp]
+
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\multicolumn{1}{|c|}{Politics}                                                       & \multicolumn{1}{c|}{Science \& Technology}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#apec2014\\ \#G20\\ \#oscarpistorius\end{tabular}        & \begin{tabular}[c]{@{}l@{}}\#rosetta\\ \#lollipop\\ \#mangalayan\end{tabular}            \\ \hline
+\multicolumn{1}{|c|}{Events}                                                         & \multicolumn{1}{c|}{Films and Pop culture}                                               \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#haiyan\\ \#memorialday\\ \#ottawashootings\end{tabular} & \begin{tabular}[c]{@{}l@{}}\#TaylorSwift\\ \#theforceawakens\\ \#johnoliver\end{tabular} \\ \hline
+\multicolumn{1}{|c|}{International}                                                  & \multicolumn{1}{c|}{Sports}                                                              \\ \hline
+\begin{tabular}[c]{@{}l@{}}\#berlinwall\\ \#ebola\\ \#erdogan\end{tabular}           & \begin{tabular}[c]{@{}l@{}}\#ausvssa\\ \#playingitmyway\\ \#nycmarathon\end{tabular}     \\ \hline
+\end{tabular}
+% \bigskip
+\captionof{table}{Table of Hashtags used for extraction. Table shows some examples of search terms chosen from various different categories.}
+\label{tab:searchterms}
+\end{table}
+
+The data from the tweets was cleaned by removing the tweets that were not in English as well as the ones that were retweeted, which is equivalent to re-publishing the same tweet from a different user. 
+
+Unique URLs were first extracted from the 16,000 or so URLs in the data. Next, data from these unique URLs was extracted and then preprocessed. The ‘newspaper’ package was used to extract article text and the title from the web page. For the articles obtained from URLs, photos and video links for example, from Instagram and Youtube needed to be removed. For this, the data cleaning was achieved by removing articles by limiting word length of the extracted text to about 150 words. This ensured the removal of photos, videos, advertisements, incorrectly extracted articles from the data.  After this preprocessing, the number of useful articles reduced from 6003 to 3066.
+
+The final version of the data consists of all tweets along with all the information of the tweet itself, such as the text of the tweet, links to articles if any, hashtags, and so on. The article links from these tweets are stored as a separate file, with information about the articles themselves, along with some preprocessed data. This includes the URL itself and the text extracted from the article, as well as some extracted information such as sentence boundaries, POS tags for tokens, parse trees and dependency trees. This processing of the text was done using the CoreNLP toolkit developed at Stanford \newcite{manning2014stanford}.
+
+Tweets are linked to URLs through another file. A URL could have been tweeted through multiple tweets, all the ids of these tweets are linked to the same URL. 

@@ -1,0 +1,19 @@
+\section{Background and Related Work}
+\change{Add papers:
+
+* summarization evaluation papers
+
+* papers on classifying tweets based on intent?
+
+* Add some glue at beginning of section}
+
+\change{move to data}
+\newcite{brooke2012building} describe the process of building a formality lexicon by analyzing the stylistics of text. They calculate formality scores for words and sentences by training a model on a large corpus based on the appearance of words in specific documents. Their model represents words as vectors and the formal and informal seeds appear in opposite halves of the graphs, suggesting that we can use these seeds to determine if an article is formal or informal. \newcite{brooke2013multi} used an LDA based model using a similar idea of seed words for getting stylistic rankings for documents. The documents were ranked for styles such as literary, colloquial, subjective, concrete, and so on. 
+
+There have also been studies specific to Twitter data, for classifying and summarizing text, intents, etc. \newcite{ghosh2011entropy} classified the retweeting activity of users based on entropy. The study considered the occurrence of the same URL in a different tweet as a ‘retweet’, and was able to separate the tweets as automatic or robotic retweeting, campaigns, news, blogs and so on. The study shows some interesting trends of retweeting activity for each of these cases. In another study, \newcite{chen2012extracting}, were able to extract sentiment expressions based on their corpus of tweets, that resulted in extraction of both formal and slang sentiment bearing words.
+
+Mirco-blogging sites, easy access to Internet and the popularity of social media offers an opportunity to analyze data that comprises of statements from a huge number of users. Twitter is such a platform and has gained millions of users by now, and is hugely popular platform now for announcements, voicing opinions, promotions and so on. This data has been used for event summarization studies. \newcite{o2010tweetmotif} uses topic summarizations for a given search for better browsing. \newcite{chakrabarti2011event} generate an event summary by learning the event using a Hidden Markov Model over the tweets describing it. \newcite{wang2014socially} generate a coherent event summary by treating summarization as an optimization problem for topic cohesion. \newcite{inouye2011comparing} compare multiple summarization techniques to generate a summary of multi-post blogs on Twitter.
+
+There has also been an attempt at generating tweets, texts of 140 characters using different text summarization techniques by  \newcite{lloret2013towards}. Summarization systems were used to summarize texts to sentences and then were compared against each other, evaluated using the ROUGE metric for evaluation. The ROUGE-1, ROUGE-2 and ROUGE-L metrics were used and the tweets were compared against an ideal summary. ROUGE is better when used with multiple reference texts and is not meant to be used at the sentence level. Thus the evaluation is done using the unigram, bigram and longest common subsequence matching techniques used in ROUGE-1, 2 and L.  
+
+To the best of our knowledge, only \newcite{lofi2012iparticipate} aim at generating tweets based on data from documents related to the topic. The system proposed uses keyword extraction techniques to generate tweets containing links to the article, hashtags based on the topic from documents and summarized content of the document. The study does not give details of implementation or evaluation of the system. Moreover, after the hashtags and the url, the Twitter constraint of 140 characters leaves room for few words in the generated tweet.
