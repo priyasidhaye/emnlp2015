@@ -1,11 +1,8 @@
 \section{Background and Related Work}
 \change{Add papers:
+* summarization evaluation paper
 
-* summarization evaluation papers
-
-* papers on classifying tweets based on intent?
-
-* Add some glue at beginning of section}
+* add transitions between paragraphs}
 
 \change{move to data}
 \newcite{brooke2012building} describe the process of building a formality lexicon by analyzing the stylistics of text. They calculate formality scores for words and sentences by training a model on a large corpus based on the appearance of words in specific documents. Their model represents words as vectors and the formal and informal seeds appear in opposite halves of the graphs, suggesting that we can use these seeds to determine if an article is formal or informal. \newcite{brooke2013multi} used an LDA based model using a similar idea of seed words for getting stylistic rankings for documents. The documents were ranked for styles such as literary, colloquial, subjective, concrete, and so on. 
@@ -17,3 +14,5 @@ Mirco-blogging sites, easy access to Internet and the popularity of social media
 There has also been an attempt at generating tweets, texts of 140 characters using different text summarization techniques by  \newcite{lloret2013towards}. Summarization systems were used to summarize texts to sentences and then were compared against each other, evaluated using the ROUGE metric for evaluation. The ROUGE-1, ROUGE-2 and ROUGE-L metrics were used and the tweets were compared against an ideal summary. ROUGE is better when used with multiple reference texts and is not meant to be used at the sentence level. Thus the evaluation is done using the unigram, bigram and longest common subsequence matching techniques used in ROUGE-1, 2 and L.  
 
 To the best of our knowledge, only \newcite{lofi2012iparticipate} aim at generating tweets based on data from documents related to the topic. The system proposed uses keyword extraction techniques to generate tweets containing links to the article, hashtags based on the topic from documents and summarized content of the document. The study does not give details of implementation or evaluation of the system. Moreover, after the hashtags and the url, the Twitter constraint of 140 characters leaves room for few words in the generated tweet.
+
+\newcite{he2000comparing} study the limits of extractive summarization by comparing user preferences for multiple types of summaries for an audio-visual presentation. They demonstrate that the most preferred method of summarization is highlights and notes provided by the author, rather than transcripts or slides from the presentation. \newcite{conroy2006topic} have defined an oracle score towards the same aim. The oracle score is based on the maximum likelihood probability of words occuring in model summaries and is in turn used to generate summaries that perform better than any extracted and also human-generated summaries. These studies show that extractive summarization algorithms may not generate good quality summaries even after giving high ROUGE evaluation scores.
