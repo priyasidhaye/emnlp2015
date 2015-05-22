@@ -15,7 +15,7 @@ Overall, this comparison showed that if the tweet is extracted as a whole from t
 
 \subsection{Percentage match for unigrams}
 
-Next, we did a percentage match with the text of the article. This was a bag-of-words check using unigrams from the tweet and the document. The order of the words in the tweet or the text did not matter. The results we got seem to suggest that a lot of significant words in the tweet are in fact present in the article. The minimum percentage match obtained was 60\%. However, since the order of the words did not matter, this result can  be traced back to the fact that tweet is based on the same topic as the document. \figref{fig:unigrammatch} shows the percentage of matches in the tweet and the article text as compared to the number of unigrams in the tweet. The mean of the match percentages is 29.53 and standard deviation is 20.2. \improvement{Add and #words matching}
+Next, we did a percentage match with the text of the article. This was a bag-of-words check using unigrams from the tweet and the document. The order of the words in the tweet or the text did not matter. The results we got seem to suggest that a lot of significant words in the tweet are in fact present in the article. The minimum percentage match obtained was 60\%. However, since the order of the words did not matter, this result can  be traced back to the fact that tweet is based on the same topic as the document. \figref{fig:unigrammatch} shows the percentage of matches in the tweet and the article text as compared to the number of unigrams in the tweet. The mean of the match percentages is 29.53 and standard deviation is 20.2. \improvement{Add and number of words matching}
 
 \begin{equation}
 \resizebox{.9\hsize}{!}{$unigramMatch = \frac{| unigrams(tweet) \cap unigrams(text) |}{| unigrams(tweet) |} * 100$}
@@ -30,7 +30,7 @@ Next, we did a percentage match with the text of the article. This was a bag-of-
 
 \subsection{Percentage match for bigrams}
 
-Similar to the unigram matching techniques, bigram percentage matching was also calculated. The text of the tweet was converted into bigrams and we then looked for those bigrams in the article text. The percentage was calculated similar to the unigram matching done earlier. \improvement{Add #words matching}
+Similar to the unigram matching techniques, bigram percentage matching was also calculated. The text of the tweet was converted into bigrams and we then looked for those bigrams in the article text. The percentage was calculated similar to the unigram matching done earlier. \improvement{Add number of words matching}
 
 \begin{equation}
 \resizebox{.9\hsize}{!}{$bigramMatch = \frac{| bigrams(tweet) \cap bigrams(text) |}{| bigrams(tweet) |} * 100$}
@@ -47,7 +47,7 @@ Similar to the unigram matching techniques, bigram percentage matching was also 
 
 \subsection{Percentage matching inside a window in the article text}
 
-The next analysis was to check for a significant word matching inside a two or three sentence window inside the article text. We used a three sentence long window using the sentence boundary information obtained during preprocessing. After the text of the window was extracted, we performed a similar analysis as the last one, except on a smaller set of sentences. Again, the order of the unigrams didn't matter. Next, the matching percentages from all such windows in the articles were compared and the maximum out of these was considered for the highest match percentage and match position for the final results. The result from this experiment is shown in \figref{fig:unigramwindow}. Here, the mean of the values is 26.6\% and deviation 17\%.\improvement(Add equation for this matching)\improvement{Add position and #words matching}
+The next analysis was to check for a significant word matching inside a two or three sentence window inside the article text. We used a three sentence long window using the sentence boundary information obtained during preprocessing. After the text of the window was extracted, we performed a similar analysis as the last one, except on a smaller set of sentences. Again, the order of the unigrams didn't matter. Next, the matching percentages from all such windows in the articles were compared and the maximum out of these was considered for the highest match percentage and match position for the final results. The result from this experiment is shown in \figref{fig:unigramwindow}. Here, the mean of the values is 26.6\% and deviation 17\%.\improvement(Add equation for this matching)\improvement{Add position and number of words matching}
 
 \begin{figure}[htbp]
 \centering
