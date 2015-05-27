@@ -2,12 +2,13 @@
 
 \subsection{Using Twitter for Data Extraction}
 
-As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, since none of the datasets used in these studies contained tweets and related articles promoted by these tweets separated into categories as required for this study, we extracted data directly from the site.
+As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, since none of the datasets used in these studies focused on tweets and related articles linked to these tweets separated into categories as required for this study, we extracted data directly from the site. This section describes extraction, cleaning and other preprocessing of the data.
 
 \subsection{Extracting Data}
 
-Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To get a broader sample, the data was extracted over the course of 15 days in November, which gave us multiple news stories to choose from for the search terms. A few examples of the search terms are shown in \tabref{tab:searchterms} Only English tweets were extracted since the study is limited to English. In the beginning, about 30,000 tweets were extracted, and more than half of these tweets, around 16,000 contained URLs referencing some news articles, photos on photo sharing sites, and videos. The hashtags were chosen to maximise the number of articles related to the tweets. Hence, a lot of topics that were chosen were being tweeted about by news agencies and other popular news sources. \improvement{Can be compressed if required}
+Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To get a broader sample, the data was extracted over the course of 15 days in November, which gave us multiple news stories to choose from for the search terms. The search terms were chosen so that there would be equal representation in terms of various stylistic properties of text like formality, subjectivity, etc. For example, searches related to politics would be more formal, while those related to films would be informal, and would also have a lot more opinion pieces about them. A few examples of the search terms and their distribution in genre are shown in \tabref{tab:searchterms}.
 
+Only English tweets were extracted since the study is limited to English. In the beginning, about 30,000 tweets were extracted, and more than half of these tweets, around 16,000 contained URLs referencing some news articles, photos on photo sharing sites, and videos. The hashtags were chosen to maximise the number of articles related to the tweets. Hence, a lot of topics that were chosen were being tweeted about by news agencies and other popular news sources.
 
 \begin{table}[htbp]
 \centering
@@ -27,8 +28,20 @@ Data was extracted from Twitter using the Twitter REST API using 51 search terms
 
 The data from the tweets was cleaned by removing the tweets that were not in English as well as the ones that were retweeted, which is equivalent to re-publishing the same tweet from a different user. 
 
-Unique URLs were first extracted from the 16,000 or so URLs in the data. Next, data from these unique URLs was extracted and then preprocessed. The ‘newspaper’ package was used to extract article text and the title from the web page. For the articles obtained from URLs, photos and video links for example, from Instagram and Youtube needed to be removed. For this, the data cleaning was achieved by removing articles by limiting word length of the extracted text to about 150 words. This ensured the removal of photos, videos, advertisements, incorrectly extracted articles from the data.  After this preprocessing, the number of useful articles reduced from 6003 to 3066.
+Unique URLs were first extracted from the 16,000 or so URLs in the data. Next, data from these unique URLs was extracted and then preprocessed. The ‘newspaper’ package\footnote{https://pypi.python.org/pypi/newspaper} was used to extract article text and the title from the web page. For the articles obtained from URLs, photos and video links for example, from Instagram and Youtube needed to be removed. For this, the data cleaning was achieved by removing articles by limiting word length of the extracted text to about 150 words. This ensured the removal of photos, videos, advertisements, incorrectly extracted articles from the data.  After this preprocessing, the number of useful articles reduced from 6003 to 3066.
 
-The final version of the data consists of all tweets along with all the information of the tweet itself, such as the text of the tweet, links to articles if any, hashtags, and so on. The article links from these tweets are stored as a separate file, with information about the articles themselves, along with some preprocessed data. This includes the URL itself and the text extracted from the article, as well as some extracted information such as sentence boundaries, POS tags for tokens, parse trees and dependency trees. This processing of the text was done using the CoreNLP toolkit developed at Stanford \newcite{manning2014stanford}.
+The final version of the data consists of all tweets along with all the information of the tweet itself, such as the text of the tweet, links to articles if any, hashtags, and so on. The article links from these tweets are stored as a separate file, with information about the articles themselves, along with some preprocessed data. This includes the URL itself and the text extracted from the article, as well as some extracted information such as sentence boundaries, POS tags for tokens, parse trees and dependency trees. This processing of the text was done using the CoreNLP toolkit developed at Stanford \newcite{manning2014stanford}. These were used later during analysis in \secref{sec:analysis}
 
-Tweets are linked to URLs through another file. A URL could have been tweeted through multiple tweets, all the ids of these tweets are linked to the same URL. 
+Tweets are linked to URLs through another file. A URL could have been tweeted through multiple tweets, all the ids of these tweets are linked to the same URL. It should be noted that the tweet to article dataset contains only the articles that are significantly long texts about the subject with a title, and contain no advertisements, other languages, or links to images or videos. \tabref{tab:ex1} shows an example of an entry in the dataset.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet & '\#RiggsReport: \#CA as the \#ElectionNight exception. Voters rewarded \#GOP nationally, but not in the \#GoldenState. http://t.co/K542wvSNVz' \\ \hline
+Title & 'The Riggs Report: California as the Election Night exception'                                                                                 \\ \hline
+Text  & 'When the dust settled on Election Night last week...'                                                                                         \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article and the text.}
+\label{tab:ex1}
+\end{table}

@@ -21,6 +21,7 @@
 \usepackage{url}
 \usepackage{latexsym}
 \usepackage{caption}
+\usepackage{amsmath}
 %
 \usepackage{lipsum}                    
 \usepackage{xargs}                     
@@ -34,8 +35,9 @@
 \newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
 \newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
 
-\newcommand{\tabref}[1]{\textit{Table \ref{#1}}}
-\newcommand{\figref}[1]{\textit{Figure \ref{#1}}}
+\newcommand{\tabref}[1]{Table \ref{#1}}
+\newcommand{\figref}[1]{Figure \ref{#1}}
+\newcommand{\secref}[1]{Section \ref{#1}}
 %
 %\setlength\titlebox{5cm}
 

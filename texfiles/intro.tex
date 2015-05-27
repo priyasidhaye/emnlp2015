@@ -1,5 +1,6 @@
 \section{Introduction}
-With the rise in popularity of social media, message broadcasting sites such as Twitter and other microblogging services have become an important means of communication, with an estimated 200 million tweets being written each day\todo{citation for this figure}. In addition to individual users, various organizations and public figures such as newspapers, government officials and entertainers have established themselves on social media in order to disseminate information or promote their products. 
+\label{sec:intro}
+With the rise in popularity of social media, message broadcasting sites such as Twitter and other microblogging services have become an important means of communication, with an estimated 500 million tweets being written each day\footnote{https://about.twitter.com/company}\todo{citation for this figure}. In addition to individual users, various organizations and public figures such as newspapers, government officials and entertainers have established themselves on social media in order to disseminate information or promote their products. 
 
 While there has been recent progress in the development of Twitter-specific POS taggers, parsers, and other tools \cite{owoputi-etal-2013,kong-etal-2014}, there has been little work on methods for generating tweets, despite the utility this would have for users and organizations. 
 
@@ -18,4 +19,3 @@ Beyond issues of evaluation measure, it is also unclear whether extraction is wh
 We begin to address the above issues through a study that examines to what extent tweet generation can be viewed as an extractive summarization problem. We extracted a data set of indicative tweets containing a link to an external article, including the documents linked to through the tweets. We used this data and applied unigram, bigram and LCS (longest common subsequence) matching techniques inspired by ROUGE to show that we need a more involved approach than directly applying existing extractive summarization algorithms developed for news text. We also use stylistic analysis on the articles to examine the role of genre differences between the source text and the target tweet.
 
 Our results point to the need for the development of a methodology for indicative tweet generation that is sensitive to stylistic factors. \todo{Mention intent of the tweets?}
-
