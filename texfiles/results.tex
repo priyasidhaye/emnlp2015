@@ -24,11 +24,21 @@ Lowest  & Highest  \\ \hline
 \label{tab:formal}
 \end{table}
 
-This formality score for each article was then correlated with the percentage of match obtained using the longest common subsequence algorithm. The Pearson correlation value was 0.41, with a p-value of 7.08e-66. The p-value justifies that we can reject the null hypothesis, and say with confidence that there is a correlation between the formality scores and the ROUGE-L scores of the tweets and articles. Hence, we can say that the more formal the subject or the article, there are higher chances of the tweet being extracted directly from the article.
-\todo{Give an example.}
+This formality score for each article was then correlated with the percentage of match obtained using the longest common subsequence algorithm. The Pearson correlation value was 0.41, with a p-value of 7.08e-66. The p-value justifies that we can reject the null hypothesis, and say with confidence that there is a correlation between the formality scores and the ROUGE-L scores of the tweets and articles. Hence, we can say that the more formal the subject or the article, there are higher chances of the tweet being extracted directly from the article. \tabref{tab:formal} gives an example of the formality of the article, which is a low 4.2 formality words per 10 words, where the tweet is not extracted from the article, but rephrased from the article instead.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet &  @globetoronto: Why Buffalo got clobbered with snow and Toronto did not. \#weather \#snowstorm http://t.co/gcwwoDPZmX... http://t.co/BXY7EH6F3u" \\ \hline
+Title & What caused Buffalo’s massive snow and why Toronto got lucky \\  \hline
+Text  & Torontonians have long been the butt of jokes about calling in the army every time a few snow flurries whip by... \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article where the formality of the article is over the mean, and the tweet is extracted from the article.}
+\label{tab:formal}
+\end{table}
 
 \section{Discussions}
-\todo{Put discussion on the need to model user intents here. Have examples to highlight need to model intent. Citing these papers is good; say also how their definition of intent is still not sufficient for tweet generation.} 
 
 A way to get around extractive summarizations for tweet generation and move towards more abstractive solutions is to learn to be able to classigy intent, or the purpose of sharing the tweets. Studies on classifying user intents in tweets are interpreted in different ways. \newcite{banerjee2012towards} analyze real time data to detect presence of intents in tweets. \newcite{wang2015mining} classify intents as food and drink, travel, career and so on, ones that can directly be used as intents for purchasing and can be utilized for advertisements. They also focus on finding tweets with intent and then classifying those. \newcite{gomez2014content} use features from text and stylistics to determine user intentions, which are classified as news report, opinion, publicity and so on. \newcite{mohammad2013identifying} study the classification of user intents specifically for tweets related to elections. They study one election and classify tweets as ones that agree or disagree with the candidate, ones that are meant for humor, support and so on. 
 

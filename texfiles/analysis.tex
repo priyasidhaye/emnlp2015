@@ -1,16 +1,52 @@
 \section{Analysis}
 \label{sec:analysis}
 
-This section details the analyses performed on the data. The analyses mimic the ROUGE-1,2 and L methods of comparing documents, where we compare the tweet and article text using these methods. This is done to determine whether the tweets promoting the articles could be generated from the document text. The results of the comparison show that the tweet is not extracted from the article text. 
+This section details the analyses performed on the data. The analyses mimic the ROUGE-1,2 and L methods of comparing documents, where we compare the tweet and article text using these methods. This is done to determine whether the tweets promoting the articles could be generated from the document text. The results of the comparison show that the tweet is not extracted from the article text. \tabref{tab:noextract} gives an example of data where the tweet that was shared about the article does not come directly from the article text, while \tabref{tab:extract} shows a tweet that was almost entirely extracted from the text of the article, but changed a little for the purpose of readability.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet &  Are \#Airlines doing enough with \#Ebola? http://t.co/XExWwxmjnk \#travel \\ \hline
+Title &  Could shortsighted airline refund policies lead to an outbreak? \\  \hline
+Text  &  The deadly Ebola virus has arrived in the United States just in time for the holiday travel season, carrying fear and uncertainty with it... \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article and the text when tweet cannot be extracted from text.}
+\label{tab:noextract}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet & Officer Wilson will be returned to active duty if no indictment, says \#Ferguson Police Chief http://t.co/zrRIBxMUYJ  \\ \hline
+Title & Jackson clarifies comments on Wilson's future status \\ \hline
+Text  & ...Chief Jackson said if the grand jury does not indict Wilson, he will immediately return to active duty.... \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article and the text when tweet can be extracted from text.}
+\label{tab:extract}
+\end{table}
 
 We calculate the degree of common words - unigrams and bigrams, between the tweet and the text of the document. We also check least common subsequences between the tweet and the document. These are the ROUGE-1,2 and L style calculations. The hypothesis is that these results give an approximation of the degree to which the tweet is extracted from the document text. 
 
 For all these analyses, the stop words have been eliminated from the tweet as well as the document, so that only the significant words are taken into consideration. The hashtags, references (@) and URLs from the tweets were also all removed.
 
 \subsection {Tweet extracted directly from article}
-To calculate the position of tweet text as a whole in the text, we checked for a complete substring match of the tweet in the text. Out of the 2471 unique instances of tweet and article pairs, a complete match was found 23 times. 9 times out of these, the tweet text had been matched against title of the article extracted into the text. The rest of the results are significant, since the text of the tweet appears exactly as is inside the text of the article. This suggests that the user chose the sentence that either seemed to be the most conclusive contribution of the article, or expressed the opinion of the user to be tweeted.
+To calculate the position of tweet text as a whole in the text, we checked for a complete substring match of the tweet in the text. Out of the 2471 unique instances of tweet and article pairs, a complete match was found 23 times. 9 times out of these, the tweet text had been matched against title of the article extracted into the text. The rest of the results are significant, since the text of the tweet appears exactly as is inside the text of the article. This suggests that the user chose the sentence that either seemed to be the most conclusive contribution of the article, or expressed the opinion of the user to be tweeted. An example for this is detailed in \tabref{tab:fullextract}
 
-Apart from the 9 times that the tweet was matched with text in the article, we also checked to see if the tweet text matched with the article titles that were separately extracted with the newspaper package. We found that it didn't match with the titles. This comparison shows that the tweet is extracted from the article very few times, and does not match with the title of the articles a lot of times either. 
+Apart from the 9 times that the tweet was matched with text in the article, we also checked to see if the tweet text matched with the article titles that were separately extracted with the newspaper package. We found that it didn't match with the titles. This comparison shows that the tweet is extracted from the article very few times, and does not match with the title of the articles a lot of times either.  
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|p{0.1\linewidth}|p{0.8\linewidth}|}
+\hline
+Tweet &  @PNHP: 6. Renounce punitive and counterproductive measures such as “sealing the borders,” http://t.co/LRLS2MhPRE \#Ebola \\ \hline
+Title & Physicians for a National Health Program \\  \hline
+Text  & As health professionals and trainees, we call on President Obama to take the following immediate steps to address the Ebola crisis... 6. Renounce punitive and counterproductive measures such as “sealing the borders,” and take steps to address the... \\ \hline
+\end{tabular}
+\captionof{table}{Example of a tweet, title of the article and the text when tweet is extracted as is from the text.}
+\label{tab:fullextract}
+\end{table}
 
 \subsection{Percentage match for unigrams}
 
@@ -89,3 +125,6 @@ l = \frac{| lcs(t, a) |}{| unigrams(t) |} * 100
 \caption{Percentages of words matching in tweet and document text using an LCS algorithm.}
 \label{fig:lcs}
 \end{figure}
+
+
+
