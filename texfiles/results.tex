@@ -9,7 +9,7 @@ We assume that the formality of an article can be estimated by the formality of 
 Let the set of formality expressions from the lexicon be $L$, and the formality score for an expression $e$ be $\textit{score}(e)$. Let the set of all substrings from the article $\textit{substrings}(a)$ be $S$. Then, the formality score $f$ for an article $a$ is the number of formal expressions per 10 words in article is   
 
 \begin{equation}
-f = \frac{\sum\limits_{e \in L, e \in S} \textit{score}(e)}{| unigrams(a) |} * 10
+f = \frac{\sum\limits_{e \in L \& e \in S} \textit{score}(e)}{| unigrams(a) |} * 10
 \end{equation}
 
 The formality lexicon gave positive weights for formal expressions and negative for informal expressions. When we computed $f$ using both formal and informal expressions, we found that the informal words predominated and ``swamped'' the signal of the formal words, leading to incomprehensible results. Thus, we discarded the informal words and used only the weights from the formal words in our final calculations. To check that these formality scores made sense intuitively, we calculated the average formality score for the articles belonging to each hashtag and ordered them, as shown in \tabref{tab:formal}.
