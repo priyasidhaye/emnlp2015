@@ -6,13 +6,13 @@ To tie in the results of the findings above with some intuitive notions about th
 
 We assume that the formality of an article can be estimated by the formality of the words and phrases in the article. We used the formality lexicon of \newcite{brooke2013multi}. They calculate formality scores for words and sentences by training a model on a large corpus based on the appearance of words in specific documents. Their model represents words as vectors and the formal and informal seeds appear in opposite halves of the graphs, suggesting that we can use these seeds to determine if an article is formal or informal. The lexicon consists of words and phrases and their degree of formality. Thus, more formal words are marked on a positive scale and informal words like those occurring in colloquial language are marked on a negative scale. 
 
-Let the set of formality expressions from the lexicon be $L$, and the formality score for an expression $e$ be $\textit{score}(e)$. Let the set of all substrings from the article $\textit{substrings}(a)$ be $S$. Then, the formality score $f$ for an article $a$ is the number of formal expressions per 10 words in article\todo{equation does not match this description. If it's per 10 words, the 10 should be in the denominator.}:  
+Let the set of formality expressions from the lexicon be $L$, and the formality score for an expression $e$ be $\textit{score}(e)$. Let the set of all substrings from the article $\textit{substrings}(a)$ be $S$. Then, the formality score $f$ for an article $a$ is the number of formal expressions per 10 words in article is   
 
 \begin{equation}
 f = \frac{\sum\limits_{e \in L, e \in S} \textit{score}(e)}{| unigrams(a) |} * 10
 \end{equation}
 
-The formality lexicon gave positive weights for formal expressions and negative for informal expressions. After calculating the formality weights for all articles, we observed that they all had a total negative normalized weight, meaning that many more informal expressions were getting matched. Hence, we used just the formal word occurrences for calculating the weight.\todo{I don't understand why this was a problem, and why we decided to only use the formal words...} As a check that these formality scores made intuitive sense, we calculated the average formality score for the articles belonging to each hashtag ordered them, as shown in \tabref{tab:formal}.
+The formality lexicon gave positive weights for formal expressions and negative for informal expressions. After calculating the formality weights for all articles, we observed that they all had a total negative normalized weight, meaning that many more informal expressions were getting matched. Hence, we used just the formal word occurrences for calculating the weight.\todo{I don't understand why this was a problem, and why we decided to only use the formal words...} To check that these formality scores made intuitive sense, we calculated the average formality score for the articles belonging to each hashtag ordered them, as shown in \tabref{tab:formal}.
 
 
 \begin{table}[htbp]

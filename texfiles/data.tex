@@ -2,14 +2,13 @@
 
 \subsection{Using Twitter for Data Extraction}
 
-As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, none of the datasets in those studies focused on tweets and related articles linked to these tweets. The dataset of \newcite{lloret2013towards} is one exception, as it contains tweets and the news articles they link to, but it only contains 200 English tweet-article pairs. We chose to build our own dataset. This section describes extraction, cleaning and other preprocessing of the data. \todo{I removed the emphasis on the hashtag/categories, because we don't actually use them in our analyses.}
+As mentioned earlier, there have been numerous studies that used data from the public Twitter feeds. However, none of the datasets in those studies focused on tweets and related articles linked to these tweets. The dataset of \newcite{lloret2013towards} is one exception, as it contains tweets and the news articles they link to, but it only contains 200 English tweet-article pairs. We chose to build our own dataset. This section describes extraction, cleaning and other preprocessing of the data.
 
 \subsection{Extracting Data}
 
 Data was extracted from Twitter using the Twitter REST API using 51 search terms, or ‘hashtags’. These hashtags were chosen from a range of topics including pop culture,  international summit meetings discussing political issues, lawsuits and trials, social issues and health care issues. All these hashtags were ‘trending’ (being tweeted about at a high rate) at the time of extraction of the data. To get a broader sample, the data was extracted over the course of 15 days in November, 2014, which gave us multiple news stories to choose from for the search terms. The search terms were chosen so that there would be broad representation in terms of various stylistic properties of text like formality, subjectivity, etc. For example, searches related to politics would be more formal, while those related to films would be informal, and would also have a lot more opinion pieces about them. A few examples of the search terms and their distribution in genre are shown in \tabref{tab:searchterms}.
 
 We extracted about 30,000 tweets, of which more than half, or around 16,000, contained URLs to an external news article, photo on photo sharing sites, or video. %The hashtags were chosen to maximise the number of articles related to the tweets. Many topics that were chosen were being tweeted about by news agencies and other popular news sources.
-\todo{Removed a sentence that I didn't understand, and felt was not essential.}
 
 \begin{table}[htbp]
 \centering
@@ -27,14 +26,14 @@ We extracted about 30,000 tweets, of which more than half, or around 16,000, con
 \label{tab:searchterms}
 \end{table}
 
-The data from the tweets was cleaned by removing the tweets that were not in English as well as the retweets; i.e., re-publications of a tweet by a different user. \todo{Does the 30000 figure refer to after removing non-English tweets?}
+The data from the tweets was cleaned by removing the tweets that were not in English as well as the retweets; i.e., re-publications of a tweet by a different user.
 
-We deduplicated the 16,000 extracted URLs into 6,003 unique addressed, then extracted and preprocessed their contents. The \texttt{newspaper} package\footnote{https://pypi.python.org/pypi/newspaper} was used to extract article text and the title from the web page. Since we are interested in text articles that can serve as the source text in a summarization setting, we needed to remove photos and video links such as those from Instagram and YouTube. To do so, we removed those links that contained fewer than 150 words. \todo{Is this correct?} After this preprocessing, the number of useful articles was reduced from 6003 to 3066.
+We deduplicated the 16,000 extracted URLs into 6,003 unique addressed, then extracted and preprocessed their contents. The \texttt{newspaper} package\footnote{https://pypi.python.org/pypi/newspaper} was used to extract article text and the title from the web page. Since we are interested in text articles that can serve as the source text for summarization algorithms, we needed to remove photos and video links such as those from Instagram and YouTube. To do so, we removed those links that contained fewer than a threshold of 150 words. After this preprocessing, the number of useful articles was reduced from 6003 to 3066. There were some further tweet-article pairs where the text of the tweets was identical, these were removed by further preprocessing and the number of unique tweet-article pairs came down to 2471. 
 
 The final version of the data consists of tweets along with other information about the tweet, such as links to articles, hashtags, time of publication, etc. We also retain the linked article text and preprocessed it using the CoreNLP toolkit \cite{manning2014stanford}. This includes the URL itself and the text extracted from the article, as well as some extracted information such as sentence boundaries, POS tags for tokens, parse trees and dependency trees. These annotations are used later during our analysis in \secref{sec:analysis}. \tabref{tab:ex1} shows an example of an entry in the dataset.
 
 %A URL could have been tweeted through multiple tweets, all the ids of these tweets are linked to the same URL. It should be noted that the tweet to article dataset contains only the articles that are significantly long texts about the subject with a title, and contain no advertisements, other languages, or links to images or videos. 
-\todo{Removed a paragraph that seems to be a duplicate of what was already said.}
+
 
 \begin{table}[htbp]
 \centering
