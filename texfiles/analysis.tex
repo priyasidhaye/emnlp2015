@@ -33,7 +33,7 @@ In addition, we consider locality within the article when computing the overlap.
 
 These calculations are analogous the ROUGE-1, -2 and -L style calculations. These results give an indication of the degree to which the tweet is extracted from the document text. 
 
-For all these analyses, the stop words have been eliminated from the tweet as well as the document, so that only the significant words are taken into consideration. The comparisons were made without lemmatization, and the hashtags, references (@) and URLs from the tweets were all removed. 
+For all these analyses, the stop words have been eliminated from the tweet as well as the document, so that only the significant words are taken into consideration. The comparisons were made without lemmatization or stemming, to adhere closely to existing work in extractive summarization, where the only modifications to the source text are removing discourse cue words or removing words by sentence compression techniques. The hashtags, references (@) and URLs from the tweets were all removed for analysis.
 
 \subsection {Exact Match Calculations}
 \label{sec:exact-match}
@@ -88,13 +88,6 @@ u = \frac{| unigrams(t) \cap unigrams(a) |}{| unigrams(t) |} * 100
 \label{fig:bigrammatch}
 \end{figure}
 
-\begin{figure}[tbp]
-\centering
-\includegraphics[width=0.5\textwidth, height=6cm]{num_bigrams}
-\caption{Histogram of number of unique tweet-article pairs vs number of bigrams matched. The mean number of bigrams matched per article is 1.9.}
-\label{fig:num_bigrams}
-\end{figure}
-
 
 \subsection{Percentage Match for Bigrams}
 \label{sec:bigrams}
@@ -107,16 +100,14 @@ b = \frac{| bigrams(t) \cap bigrams(a) |}{| bigrams(t) |} * 100
 
 \figref{fig:bigrammatch} shows the percentages of matched bigrams found. The mean is 10.73 with a standard deviation of 18.5. As seen in the figure, most of the tweet-article pairs have no matched bigrams. The percentage then increases to reflect the complete matches found above.
 
-\figref{fig:num_bigrams} shows frequency of the number of tweet-article pairs for the number of bigrams matched. There are no matched bigrams for most of the pairs. A smaller number of articles had one matched bigram, and the number decreased until the end, where it increases a little at more than 10 matched bigrams because of exact tweet matches. 
-
-
-
 \begin{figure}[tbp]
 \centering
-\includegraphics[width=0.5\textwidth, height=6cm]{unigramwindow}
-\caption{Percentages of common words in tweet and a three sentence window in the article. The maximum match from all percentages is chosen for an article. The red horizontal line is the mean is 26.6\%, and standard deviation 17\%.}
-\label{fig:unigramwindow}
+\includegraphics[width=0.5\textwidth, height=6cm]{num_bigrams}
+\caption{Histogram of number of unique tweet-article pairs vs number of bigrams matched. The mean number of bigrams matched per article is 1.9.}
+\label{fig:num_bigrams}
 \end{figure}
+
+\figref{fig:num_bigrams} shows frequency of the number of tweet-article pairs for the number of bigrams matched. There are no matched bigrams for most of the pairs. A smaller number of articles had one matched bigram, and the number decreased until the end, where it increases a little at more than 10 matched bigrams because of exact tweet matches. 
 
 
 \subsection{Percentage Match Inside a Window in the Article Text}
@@ -130,15 +121,14 @@ After the text of the window was extracted, we performed a similar analysis as t
 uw = max_{w_i \in S} u(t, w_i)
 \end{equation}
 
-The result from this experiment is shown in \figref{fig:unigramwindow}. Here, the mean of the values is 26.6\% and deviation 17\%. Again this shows that only a small proportion of tweets can be generated even with an approach that combines unigrams from multiple sentences in the article.
-
-
 \begin{figure}[tbp]
 \centering
-\includegraphics[width=0.5\textwidth, height=6cm]{lcs_doc}
-\caption{Percentages of words matching in tweet and document text using an LCS algorithm. Mean is 44.6\%, which is shown by the red horizontal line, and standard deviation is 22.7\%.}
-\label{fig:lcs}
+\includegraphics[width=0.5\textwidth, height=6cm]{unigramwindow}
+\caption{Percentages of common words in tweet and a three sentence window in the article. The maximum match from all percentages is chosen for an article. The red horizontal line is the mean is 26.6\%, and standard deviation 17\%.}
+\label{fig:unigramwindow}
 \end{figure}
+
+The result from this experiment is shown in \figref{fig:unigramwindow}. Here, the mean of the values is 26.6\% and deviation 17\%. Again this shows that only a small proportion of tweets can be generated even with an approach that combines unigrams from multiple sentences in the article.
 
 
 \subsection{Longest Common Subsequence Match Inside a Window for the Text}
@@ -149,9 +139,18 @@ Again, the final result for the article was the window in which the maximum perc
 
 If $\textit{lcs(t, a)}$ is the longest common subsequence between the tweet $t$ and article $a$, $\textit{unigrams}(x)$ is the set of unigrams for a text $x$, then the percentage of match for the lcs as compared to the tweet, $\textit{l}$ is
 
+
+
 \begin{equation}
 l = \frac{| lcs(t, a) |}{| unigrams(t) |} * 100
 \end{equation}
- These numbers are shown in \figref{fig:lcs}. The mean here is 44.6\% and the standard deviation is 22.7\%. 
 
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=0.5\textwidth, height=6cm]{lcs_doc}
+\caption{Percentages of words matching in tweet and document text using an LCS algorithm. Mean is 44.6\%, which is shown by the red horizontal line, and standard deviation is 22.7\%.}
+\label{fig:lcs}
+\end{figure}
+
+ These numbers are shown in \figref{fig:lcs}. The mean here is 44.6\% and the standard deviation is 22.7\%. 
 
