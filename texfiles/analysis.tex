@@ -1,7 +1,7 @@
 \section{Analysis}
 \label{sec:analysis}
 
-We now describe the analyses we performed on the data. Our goal is to investigate what proportion of the indicate tweets that we extracted can be found in the articles that they link to, in order to determine whether indicative tweet generation can be viewed as an extractive summarization problem. \tabref{tab:noextract} gives an example of data where the tweet that was shared about the article does not come directly from the article text, while \tabref{tab:extract} shows a tweet that was almost entirely extracted from the text of the article, but changed a little for the purpose of readability.
+We now describe the analyses we performed on the data. Our goal is to investigate what proportion of the indicative tweets that we extracted can be found in the articles that they link to, in order to determine whether indicative tweet generation can be viewed as an extractive summarization problem. \tabref{tab:noextract} gives an example of data where the tweet that was shared about the article does not come directly from the article text, while \tabref{tab:extract} shows a tweet that was almost entirely extracted from the text of the article, but changed a little for the purpose of readability.
 
 \begin{table}[htbp]
 \centering
@@ -33,13 +33,13 @@ In addition, we consider locality within the article when computing the overlap.
 
 These calculations are analogous the ROUGE-1, -2 and -L style calculations. These results give an indication of the degree to which the tweet is extracted from the document text. 
 
-For all these analyses, the stop words have been eliminated from the tweet as well as the document, so that only the significant words are taken into consideration. The comparisons were made without lemmatization or stemming, to adhere closely to existing work in extractive summarization, where the only modifications to the source text are removing discourse cue words or removing words by sentence compression techniques. The hashtags, references (@) and URLs from the tweets were all removed for analysis.
+For all these analyses, the stop words have been eliminated from the tweet as well as the document, so that only the informative words are taken into consideration. The comparisons were made without lemmatization or stemming, to adhere closely to existing work in extractive summarization, where the only modifications to the source text are removing discourse cue words or removing words by sentence compression techniques. The hashtags, references (@) and URLs from the tweets were all removed for analysis.
 
 \subsection {Exact Match Calculations}
 \label{sec:exact-match}
 We first checked for a complete substring match of the tweet in the text. Out of the 2471 unique instances of tweet and article pairs, a complete match was found only 23 times. In 9 cases out of these, the tweet text matched the title of the article, which our preprocessing tool did not correctly separate from the body of the article. In the other cases, the text of the tweet appears in its entirety inside the body of the article. This suggests that the user chose the sentence that either seemed to be the most conclusive contribution of the article, or expressed the opinion of the user to be tweeted. An example for this is detailed in \tabref{tab:fullextract}.
 
-Apart from the 9 times where the tweet was matched with title in the article, we also checked to see if the tweet text matched with the article titles that were separately extracted by the \texttt{newspaper} package in order to determine if tweets could be generated using the headline generation methods. We found that it did not match with the titles. However, even though there are no exact matches, there might still be some matches where the tweet is a slight modification of the headline of the article, and can be measured using a partial match measure.
+Apart from the 9 times where the tweet was matched with title in the article, we also checked to see if the tweet text matched with the article titles that were separately extracted by the \texttt{newspaper} package in order to determine if tweets could be generated using the headline generation methods. We found that it did not match with the titles. However, even though there are no exact matches, there might still be matches where the tweet is a slight modification of the headline of the article, and can be measured using a partial match measure.
 
 \begin{table}[htbp]
 \centering
@@ -57,7 +57,7 @@ Text  & As health professionals and trainees, we call on President Obama to take
 \begin{figure}[tbp]
 \centering
 \includegraphics[width=0.5\textwidth, height=6cm]{unigrammatch}
-\caption{Distribution of unigram match percentage over unique tweets and articles. Mean is 29.53\%, indicated by the red horizontal line, with a standard deviation of 20.2\%}
+\caption{Distribution of unigram match percentage over unique tweets and articles. The mean is 29.53\%, indicated by the red horizontal line, with a standard deviation of 20.2\%}
 \label{fig:unigrammatch}
 \end{figure}
 
@@ -73,10 +73,10 @@ Text  & As health professionals and trainees, we call on President Obama to take
 \subsection{Percentage Match for Unigrams}
 \label{sec:unigrams}
 
-Next, we did a percentage match with the text of the article. This was a bag-of-words check using unigrams from the tweet and the document. Let $\textit{unigrams}(x)$ be the set of unigrams for some text $x$, then $u$, the percentage of matching unigrams found between a given tweet, $t$ and a given article, $a$, can be defined as  
+Next, we did a percentage match with the text of the article. This was a bag-of-words check using unigram overlap between the tweet and the document. Let $\textit{unigrams}(x)$ be the set of unigrams for some text $x$, then $u$, the percentage of matching unigrams found between a given tweet, $t$ and a given article, $a$, can be defined as  
 
 \begin{equation}
-u = \frac{| unigrams(t) \cap unigrams(a) |}{| unigrams(t) |} * 100
+u = \frac{| \textit{unigrams}(t) \cap \textit{unigrams}(a) |}{| \textit{unigrams}(t) |} * 100
 \end{equation}
 
 \figref{fig:unigrammatch} shows the percentage of matches in the tweet and the article text as compared to the number of unigrams in the tweet. The mean match percentage is 29.53\% and standard deviation is 20.2\%. The mean of this distribution shows that the number of matched unigrams from a tweet in the article are fairly low. \figref{fig:num_unigrams} shows the number of articles with a certain number of matching unigrams. The graph shows that the most common number of unigrams matched was 2. The number of articles with higher unigrams matched goes on decreasing. The slight rise at the end - more than 10 matched unigrams - is accounted for by the completely matched tweets described above.
@@ -95,7 +95,7 @@ u = \frac{| unigrams(t) \cap unigrams(a) |}{| unigrams(t) |} * 100
 Similar to the unigram matching techniques, the bigram percentage matching was also calculated. The text of the tweet was converted into bigrams and we then looked for those bigrams in the article text. The percentage was calculated similar to the unigram matching done earlier. For the set of bigrams for a text $x$, $\textit{bigrams}(x)$, percentage of matching bigrams $b$ for the tweet $t$ and article $a$ is: 
 
 \begin{equation}
-b = \frac{| bigrams(t) \cap bigrams(a) |}{| bigrams(t) |} * 100
+b = \frac{| \textit{bigrams}(t) \cap \textit{bigrams}(a) |}{| \textit{bigrams}(t) |} * 100
 \end{equation}
 
 \figref{fig:bigrammatch} shows the percentages of matched bigrams found. The mean is 10.73 with a standard deviation of 18.5. As seen in the figure, most of the tweet-article pairs have no matched bigrams. The percentage then increases to reflect the complete matches found above.
@@ -113,7 +113,7 @@ b = \frac{| bigrams(t) \cap bigrams(a) |}{| bigrams(t) |} * 100
 \subsection{Percentage Match Inside a Window in the Article Text}
 \label{sec:window}
 
-The next analysis checks for a significant word matching inside a three-sentence window inside the article text. We used a three sentence long window using the sentence boundary information obtained during preprocessing. A window of three sentences was chosen to give a smaller context for the tweet to be extracted from than the entire article. The number was chosen as a moderate context window size as not too small to reduce it to a sentence level, and not too big for the context to be diluted. This was done to investigate whether a pseudo-extractive sentence compression approach could convert a small number of sentences into a tweet.
+The next analysis checks for a significant word matching inside a three-sentence window inside the article text. We used a three sentence long window using the sentence boundary information obtained during preprocessing. A window of three sentences was chosen to give a smaller context for the tweet to be extracted from than the entire article. The number was chosen as a moderate context window size as not too small to reduce it to a sentence level, and not too big for the context to be diluted. This was done to investigate whether a pseudo-extractive multi-sentence compression approach could convert a small number of sentences into a tweet.
 
 After the text of the window was extracted, we performed a similar analysis as the last one, except on a smaller set of sentences. The matching percentages from all three-sentence windows in the articles were computed and the maximum out of these was taken for the final results. Let a sentence window $w_i$ be the set of three consecutive sentences starting from the sentence number $i$. For this window, the unigram match in the tweet $t$, and the window is the unigram match $u$ calculated above. Then, the maximum match from all the windows, $uw$ is 
 
@@ -142,7 +142,7 @@ If $\textit{lcs(t, a)}$ is the longest common subsequence between the tweet $t$ 
 
 
 \begin{equation}
-l = \frac{| lcs(t, a) |}{| unigrams(t) |} * 100
+l = \frac{| \textit{lcs}(t, a) |}{| \textit{unigrams}(t) |} * 100
 \end{equation}
 
 \begin{figure}[tbp]

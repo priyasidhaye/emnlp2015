@@ -9,7 +9,7 @@ We assume that the formality of an article can be estimated by the formality of 
 Let the set of formality expressions from the lexicon be $L$, and the formality score for an expression $e$ be $\textit{score}(e)$. Let the set of all substrings from the article $\textit{substrings}(a)$ be $S$. Then, the formality score $f$ for an article $a$ is the number of formal expressions per 10 words in article is   
 
 \begin{equation}
-f = \frac{\sum\limits_{e \in L \& e \in S} \textit{score}(e)}{| unigrams(a) |} * 10
+f = \frac{\sum\limits_{e \in L \& e \in S} \textit{score}(e)}{| \textit{unigrams}(a) |} * 10
 \end{equation}
 
 The formality lexicon gave positive weights for formal expressions and negative for informal expressions. When we computed $f$ using both formal and informal expressions, we found that the informal words predominated and ``swamped'' the signal of the formal words, leading to incomprehensible results. Thus, we discarded the informal words and used only the weights from the formal words in our final calculations. To check that these formality scores made sense intuitively, we calculated the average formality score for the articles belonging to each hashtag and ordered them, as shown in \tabref{tab:formal}.
@@ -23,11 +23,11 @@ Lowest  & Highest  \\ \hline
 \#TaylorSwift           & \#erdogan                \\
 \#winteriscoming        & \#apec                  \\ \hline
 \end{tabular}
-\captionof{table}{Table of hashtags(broadly, topics) with highest and lowest formality according to the lexicon.}
+\captionof{table}{Table of hashtags (broadly, topics) with highest and lowest formality according to the lexicon.}
 \label{tab:formal}
 \end{table}
 
-This formality score for each article was correlated with the percentage of match obtained using the longest common subsequence algorithm. The Pearson correlation value was 0.41, with a p-value of 7.08e-66, indicating that the interaction between formality and overlap was highly significant. Hence, we can say that the more formal the subject or the article, the better that the tweet can be extracted from the article. \tabref{tab:formal} gives an example of the formality of the article, which is a low 4.2 formality words per 10 words, where the tweet is not extracted from the article, but rephrased from the article instead.
+This formality score for each article was correlated with the percentage of match obtained using the longest common subsequence algorithm. The Pearson correlation value was 0.41, with a p-value of 7.08e-66, indicating that the interaction between formality and overlap was highly significant. Hence, we can say that the more formal the subject or the article, the better the tweet can be extracted from the article. \tabref{tab:formal} gives an example of the formality of the article, which is a low 4.2 formality words per 10 words, where the tweet is not extracted from the article, but rephrased from the article instead.
 
 \begin{table}[htbp]
 \centering
@@ -40,6 +40,9 @@ Text  & Torontonians have long been the butt of jokes about calling in the army 
 \captionof{table}{Example of a tweet, title of the article where the formality of the article is over the mean, and the tweet is extracted from the article.}
 \label{tab:formal}
 \end{table}
+
+This could be explained by the fact that less formal tweets would have more abbreviations and less formal language with a lot more out of vocabulary words, and extensions of words, causing less overlap. It could be countered by normalizing the tweet text and then calculating the overlap, which we intend to do in the future.
+
 
 \section{Discussions}
 Having presented the above statistics showing that only a small portion of indicative tweets can be recovered from the article they link to if viewed as an extractive summarization problem, the question then becomes, how should we view the process of tweet generation?
